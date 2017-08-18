@@ -3,9 +3,15 @@
     <body bgcolor="black">
         <center>
             <div id="container">
-                {% for image_path in image_paths %}
-                    {% load  static %}<img class="lazy" data-original="{% static image_path %}" width="1000">
-                {% endfor %}
+            {% load index %}
+            {% load  static %}
+            {% for image_path in image_paths %}
+                {% if images_need_resizing|index:forloop.counter0 %}
+                <img class="lazy" data-original="{% static image_path %}" width="1000"><br>
+                {% else %}
+                <img class="lazy" data-original="{% static image_path %}" height="900"><br>
+                {% endif %}
+            {% endfor %}
             </div>
             <script src="http://webmap2.map.bdimg.com/yyfm/jQuery_1.x/1.10.2/js/jQuery_1.x.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery_lazyload/1.9.7/jquery.lazyload.js"></script>

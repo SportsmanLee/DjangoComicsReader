@@ -1,8 +1,15 @@
 <html>
 <head></head>
 <body>
-{% for album in albums %}
-    <h1>{{ album }}</h1>
-{% endfor %}
+    <center>
+    {% load index %}
+    {% load static %}
+    {% for album in albums %}
+        
+        <h2><a href="/album/{{ forloop.counter0 }}">
+            <img src="{% static images|index:forloop.counter0 %}" width="200"><br>
+            {{ albums|index:forloop.counter0 }}</a></h2>
+    {% endfor %}
+    </center>
 </body>
 </html>

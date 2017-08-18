@@ -3,6 +3,13 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django import forms
 import os
+import PIL
+
+def list_images(dir_path):
+    included_extensions = ['jpg', 'bmp', 'png', 'gif']
+    file_names = [fn for fn in os.listdir(dir_path)
+        if any(fn.endswith(ext) for ext in included_extensions)]
+    return file_names
 
 # Create your models here.
 class Category(models.Model):
@@ -26,29 +33,38 @@ class ArticleForm(forms.ModelForm):
 
 class Image(models.Model):
     def get_image_paths(self, album_path):
-        for root, dirs, files in os.walk(album_path + os.sep):
-            #debug information, just to get an idea how walk works.
-            #currently we are traversing over all files with any extension
-            # print("Current directory", root)
-            # for dir in dirs:
-            #     print("Sub directories", dir)
-            # print("Files", files)
-            if not files:
-                continue
+        file_names = list_images(album_path)
 
-            image_paths = []
-            for file in files:
-                #now we have found the desired file.
-                #we want to use this information to create a url based on our static path, so we need only the path sections past "static"
-                #we can achieve this like so (just one way)
-                path = os.sep.join(os.path.join(root, file).split(os.sep)[-2:])
-                image_paths.append(path)
-                #print("image_path", path)
+        image_paths = []
+        for file_name in file_names:
+            #now we have found the desired file.
+            #we want to use this information to create a url based on our static path, so we need only the path sections past "static"
+            #we can achieve this like so (just one way)
+            path = os.sep.join(os.path.join(album_path, file_name).split(os.sep)[-2:])
+            image_paths.append(path)
 
-            return image_paths
+        return image_paths
+
+    def get_cover_path(self, album_path):
+        file_names = list_images(album_path)
+        cover_path = os.sep.join(os.path.join(album_path, file_names[0]).split(os.sep)[-2:])
+
+        return cover_path
+
+    def get_image_sizes(self, album_path):
+        file_names = list_images(album_path)
+
+        images_need_resizing = []
+        for file_name in file_names:
+            img = PIL.Image.open(os.path.join(album_path, file_name))
+            if img.height > img.width:
+                images_need_resizing.append(True)
+            else:
+                images_need_resizing.append(False)
+        return images_need_resizing
 
 class Album(models.Model):
     def get_albums(self):
-        dirs = os.listdir('./Albums/')
+        dirs = os.listdir('.\\Albums\\')
         albums = dirs
         return albums
