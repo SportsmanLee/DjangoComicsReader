@@ -64,7 +64,7 @@ class Image(models.Model):
         return images_need_resizing
 
 class Album(models.Model):
-    def get_albums(self):
-        dirs = os.listdir('.\\Albums\\')
+    def get_albums(self, album_path):
+        dirs = os.listdir(album_path)
         albums = dirs
         return albums

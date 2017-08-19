@@ -1,15 +1,22 @@
+<link rel="stylesheet" type="text/css" href="blog/css/style.css"/>
 <html>
 <head></head>
 <body>
-    <center>
-    {% load index %}
-    {% load static %}
-    {% for album in albums %}
-        
-        <h2><a href="/album/{{ forloop.counter0 }}">
-            <img src="{% static images|index:forloop.counter0 %}" width="200"><br>
-            {{ albums|index:forloop.counter0 }}</a></h2>
-    {% endfor %}
-    </center>
+<center>
+{% load index %}
+{% load static %}
+{% for dict in images_dict %}
+    <div class="post_box">
+        <div class="img_box">
+            <a href="/album/{{ forloop.counter0 }}"><img src="{% static dict.cover_path %}" width="200"></a>
+        </div>
+        <div class="title_box">
+            <h2>
+                <a href="/album/{{ forloop.counter0 }}">{{ albums|index:forloop.counter0 }} [{{ dict.how_many }}P]</a>
+            </h2>
+        </div>
+    </div>
+{% endfor %}
+</center>
 </body>
 </html>
