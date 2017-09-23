@@ -40,5 +40,6 @@ def album(request, pk):
     image_paths = Image().get_image_paths(path.join('Albums', albums[int(pk)]))
     images_need_resizing = Image().get_image_sizes(path.join('Albums', albums[int(pk)]))
     
-    return render(request, "album.html", {'image_paths': image_paths, 
+    return render(request, "album.html", {'album_title': albums[int(pk)],
+                                          'image_paths': image_paths, 
                                           'images_need_resizing': images_need_resizing})

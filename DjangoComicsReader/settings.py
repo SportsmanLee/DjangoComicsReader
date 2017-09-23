@@ -25,7 +25,7 @@ SECRET_KEY = '7ecwhunc---k+$poe)y2y4*&1mg8rakjt1ly4y(f+n4l$-d82)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.101']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition

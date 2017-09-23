@@ -1,22 +1,49 @@
-<link rel="stylesheet" type="text/css" href="blog/css/style.css"/>
+<link rel="stylesheet" type="text/css" href="Albums/css/style.css"/>
 <html>
-<head></head>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- 上述3個meta標籤*必須*放在最前面，任何其他內容都*必須*跟隨其後！ -->
+    
+        <title>Django Comic Reader</title>
+    </head>
+
 <body>
-<center>
-{% load index %}
-{% load static %}
-{% for dict in images_dict %}
-    <div class="post_box">
-        <div class="img_box">
-            <a href="/album/{{ forloop.counter0 }}"><img src="{% static dict.cover_path %}" width="200"></a>
+
+    <center>
+        
+        <div class="inner">
+            <h3 class="masthead-brand">Django Comic Reader</h3>
+            <nav class="navbar">
+                <ul class="nav masthead-nav">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="#About">About</a></li>
+                </ul>
+            </nav>
         </div>
-        <div class="title_box">
-            <h2>
-                <a href="/album/{{ forloop.counter0 }}">{{ albums|index:forloop.counter0 }} [{{ dict.how_many }}P]</a>
-            </h2>
+
+        <div class="container">
+            <div class="row">
+                {% load index %}{% load static %}
+                {% for dict in images_dict %}
+                <div class="hvr-grow">
+                    <div class="col-xs-4 col-lg-4">
+                        <div class="panel panel-default panel-modest">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><a href="/album/{{ forloop.counter0 }}">{{ albums|index:forloop.counter0 }} [{{ dict.how_many }}P]</a></h3>
+                            </div>
+                            <div class="panel-body">
+                                <a href="/album/{{ forloop.counter0 }}"><img src="{% static dict.cover_path %}" width="250"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
-    </div>
-{% endfor %}
-</center>
+
+    </center>
+
 </body>
 </html>

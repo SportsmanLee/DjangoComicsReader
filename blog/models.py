@@ -65,6 +65,8 @@ class Image(models.Model):
 
 class Album(models.Model):
     def get_albums(self, album_path):
-        dirs = os.listdir(album_path)
-        albums = dirs
+        albums = []
+        for dir in os.listdir(album_path):
+            if list_images(os.path.join(album_path, dir)):
+                albums.append(dir)
         return albums
