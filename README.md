@@ -20,3 +20,4 @@ python manage.py runserver
 Open a browser, and browse "127.0.0.1:8000" or "localhost:8000".
 
 # Screenshot
+![](screenshot.png)
