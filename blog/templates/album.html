@@ -35,12 +35,16 @@
 
             <div class="container">
             {% load index %}
-            {% load  static %}
+            {% load static %}
             {% for image_path in image_paths %}
                 {% if images_need_resizing|index:forloop.counter0 %}
-                <img class="lazy" data-original="{% static image_path %}" width="1000"><br>
+                <a href="#{{ forloop.counter0 }}">
+                    <img id="{{ forloop.counter0 }}" class="lazy" data-original="{% static image_path %}" width="1000">
+                </a><br>
                 {% else %}
-                <img class="lazy" data-original="{% static image_path %}" height="900"><br>
+                <a href="#{{ forloop.counter0 }}">
+                    <img id="{{ forloop.counter0 }}" class="lazy" data-original="{% static image_path %}" height="900"><br>
+                </a><br>
                 {% endif %}
             {% endfor %}
             </div>
