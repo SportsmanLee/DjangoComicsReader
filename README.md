@@ -1,12 +1,12 @@
 # Django Comics Reader
-DjangoComicsReader is an app developed by Python. It uses Django to allow you to watch your local comics straightly on a browser. By displaying all photos in vertical order in one page, you can read the comics by just scrolling down.
+DjangoComicsReader is an app developed with Python. It uses Django to allow you to watch your local comics straightly on a browser. By displaying all photos in vertical order in one page, you can read the comics by just scrolling down.
 
 # Requirements
- * Python 3.5 or above  
+ * Python 3.5 or above
 
 # Installation
 ```
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 # How to use it
